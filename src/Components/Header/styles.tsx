@@ -25,11 +25,15 @@ export const Container = styled.header`
       border-bottom: 3px solid transparent;
 
       &:hover {
-        border-bottom: 3px solid ${({ theme }) => theme.colors.background};
+        border-bottom: 3px solid ${({ theme }) => theme.colors.button};
       }
       &:active {
-        color: ${({ theme }) => theme.colors.background};
+        color: ${({ theme }) => theme.colors.button};
       }
     }
   }
+`
+export const Logo = styled.img`
+  width: 90px;
+  align-items: center;
 `

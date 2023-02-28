@@ -1,33 +1,14 @@
-import { Comics } from "../Comics"
 import { GoogleMap, Marker, LoadScript, StandaloneSearchBox } from '@react-google-maps/api';
 import { useEffect, useState } from "react";
 import { useLocation } from 'react-router-dom';
 import { BoxInfoSend, Container, ContainerForm, ContainerMap } from "./styles";
 import Geocode from "react-geocode";
 
-
 const containerStyle = {
   width: '600px',
   height: '400px'
 };
 
-const position = {
-  lat: -7.201360602990173,
-  lng: -39.39152415159019
-};
-
-interface ComicsPropsSend {
-  title: string;
-  data: Comic[];
-}
-
-interface Comic {
-  title: string;
-  thumbnail: {
-    path: string;
-    extension: string;
-  };
-}
 interface Address {
   cep: string;
   logradouro: string;
@@ -36,30 +17,44 @@ interface Address {
   uf: string;
 }
 
-export function Send({ title }: ComicsPropsSend) {
+const latFixed = -7.179754172079997
+const lngFixed = -39.32966196623888
+
+export function Send() {
+  const locationRoute = useLocation();
+  let comic = null;
+  if (locationRoute.state) {
+    comic = locationRoute.state.comic;
+  }
+  const [coords, setCoords] = useState<{ lat: number, lng: number }>({ lat: latFixed, lng: lngFixed });
   const [searchBox, setSeachBox] = useState<google.maps.places.SearchBox>()
   const [map, setMap] = useState<google.maps.Map>()
   const [markers, setMarkers] = useState<any[]>([])
 
   const [address, setAddress] = useState<Address>({ cep: "", logradouro: "", bairro: "", localidade: "", uf: "" });
-  const [coords, setCoords] = useState<{ lat: number, lng: number }>({ lat: 0, lng: 0 });
+
   const [error, setError] = useState<string | null>(null);
 
   const apiKey = "AIzaSyDPhTZEnGi61k19jjdQprQQOerTE8TQ5U0"
 
-  const locationRoute = useLocation();
-  const { data, comic, destination } = locationRoute.state;
+
   useEffect(() => {
     Geocode.setApiKey(apiKey);
     Geocode.setLanguage("pt-BR");
     Geocode.setLocationType("ROOFTOP");
 
   }, []);
+  useEffect(() => {
+    if (map) {
+      map.panTo(coords);
+    }
+  }, [map, coords]);
+
 
   const handleFormSubmit = async (event: any) => {
     event.preventDefault();
     try {
-      const response = await Geocode.fromAddress(address.logradouro + ", " + address.bairro + ", " + address.uf + ", " + address.localidade);
+      const response = await Geocode.fromAddress(address.logradouro + ", " + address.bairro + ", " + address.localidade + ", " + address.uf);
       const location = response.results[0].geometry.location;
       setCoords({ lng: location.lng, lat: location.lat });
       setError(null);
@@ -68,7 +63,8 @@ export function Send({ title }: ComicsPropsSend) {
       setCoords({ lat: 0, lng: 0 });
     }
   };
-  console.log(coords)
+
+
   const onMapLoad = (map: google.maps.Map) => {
     setMap(map)
   }
@@ -76,8 +72,6 @@ export function Send({ title }: ComicsPropsSend) {
     console.log('map', map)
     setSeachBox(ref)
   }
-
-
   const onPlacesChanged = () => {
     const places = searchBox!.getPlaces();
     console.log(places)
@@ -126,8 +120,8 @@ export function Send({ title }: ComicsPropsSend) {
           </form>
           <BoxInfoSend>
             <h3>Comic selected for send:</h3>
-            {comic.title}
-            <img src={`${comic.thumbnail.path}.${comic.thumbnail.extension}`} alt="" />
+            {comic?.title}
+            <img src={`${comic?.thumbnail.path}.${comic?.thumbnail.extension}`} alt="" />
           </BoxInfoSend>
           {error && <div>{error}</div>}
         </div>

@@ -1,5 +1,12 @@
 import styled from "styled-components";
 
+export const Loading = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+`
+
 export const Container = styled.div`
   display: flex;
   flex-wrap: wrap;
@@ -20,10 +27,9 @@ export const Card = styled.div`
   box-shadow: 0px 0px 5px gray;
   cursor: pointer;
 
-  transition: transform 1s;
-	transform-style: preserve-3d;
   &:hover {
-    transform: rotateY(360deg);
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+  transform: translateY(-4px);
   }
 `;
 
@@ -71,11 +77,19 @@ export const ModalSection = styled.section`
 export const Button = styled.div`
   margin-top: 2rem;
   background: ${({ theme }) => theme.colors.modal};
-
+  margin: 0.5rem;
+  gap: 1rem;
   button {
-    /* background: ${({ theme }) => theme.colors.background}; */
+    margin-top: 0.5rem;
   }
   input {
     background: ${({ theme }) => theme.colors.modal};
+
+  }
+  form {
+    display: flex;
+    flex-direction: column;
+    width: 30vw;
+
   }
 `

@@ -49,3 +49,9 @@ export const BoxInfoSend = styled.div`
     height: auto;
   }
 `
+
+
+export const containerStyle = {
+  width: '600px',
+  height: '400px'
+};

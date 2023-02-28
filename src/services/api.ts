@@ -1,8 +1,6 @@
 import axios, { AxiosResponse } from 'axios';
 import md5 from 'md5';
 
-
-// Define o tipo para o objeto Comic
 type Comic = {
   id: number;
   title: string;
@@ -21,7 +19,6 @@ type Comic = {
   }[];
 };
 
-// Define o tipo de retorno da função getComics
 function getComics(): Promise<AxiosResponse<{ data: { results: Comic[] } }>> {
   const baseURL = 'https://gateway.marvel.com:443/v1/public/comics?';
   const privateKey = '4c17581c96eeb207a7ce8969d47bf280f652b47a';

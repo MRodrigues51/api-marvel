@@ -21,21 +21,21 @@ export const ListComics = styled.div`
     border-radius: 5px;
     box-shadow: 7px 7px 13px 0px rgba(50, 50, 50, 0.22);
     padding: 10px;
-    /* margin: 20px; */
-    /* width: 300px; */
     transition: all 0.3s ease-out;
     h2, p {
       margin-bottom: 0.5rem;
     }
     img {
-      /* height: 350px; */
-      /* float: right; */
       max-width: 300px;
       max-height: 300px;
     }
     footer {
       padding: 1rem;
       text-align: right;
+    }
+    &:hover {
+      box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+      transform: translateY(-4px);
     }
   }
 `

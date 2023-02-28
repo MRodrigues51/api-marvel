@@ -1,17 +1,19 @@
 import { NavLink } from "react-router-dom";
-import { Container } from "./styles";
+import { Container, Logo } from "./styles";
+import marvelLogo from '../../assets/marvel.svg'
 
 export function Header() {
   return (
     <Container>
-      {/* <img src={} alt="" /> */}
-      Logo
+      <NavLink to="/">
+        <Logo src={marvelLogo} />
+      </NavLink>
       <nav>
         <NavLink to="/" title="Home" className="active">
-          {/* <Timer size={24} /> */}Home
+          Home
         </NavLink>
         <NavLink to="/comics" title="Comics">
-          {/* <Scroll size={24} /> */}Comics
+          Comics
         </NavLink>
         <NavLink to="/send" title="Send">
           Send

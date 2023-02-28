@@ -1,12 +1,9 @@
 import { useEffect, useState } from "react";
 import Modal from 'react-modal';
-import { Link } from "react-router-dom";
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { format } from 'date-fns';
 import getComics from "../../services/api"
-import { Card, CardTitle, CardImage, Container, ModalContent, ModalHeader, ModalSection, Button } from './styles'
-import { Send } from "../Send";
+import { Card, CardTitle, CardImage, Container, ModalContent, ModalHeader, ModalSection, Button, Loading } from './styles'
 
 
 interface ComicsProps {
@@ -26,68 +23,47 @@ interface ComicsProps {
     price: number;
   }[];
 }
-interface ComicsPropsSend {
-  title: string;
-  localidade: string;
-  cep: string;
-  bairro: string;
-  logradouro: string;
-  uf: string;
-}
-
 
 export function Comics() {
   const [comicsList, setComicsList] = useState<ComicsProps[]>([]);
   const [selectedComic, setSelectedComic] = useState<ComicsProps | null>(null);
-  const [destinationAddress, setDestinationAddress] = useState('');
-
-  const [cep, setCep] = useState('');
-  const [filteredData, setFilteredData] = useState<ComicsPropsSend>({
-    title: '',
-    localidade: '',
-    cep: '',
-    bairro: '',
-    logradouro: '',
-    uf: '',
-
-
-  });
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState('')
 
   useEffect(() => {
-    getComics()
-      .then(comics => setComicsList(comics.data.data.results))
-      .catch(err => console.log(err));
+    setLoading(true);
+    setTimeout(() => {
+      getComics()
+        .then(comics => {
+          setComicsList(comics.data.data.results);
+          setLoading(false);
+        })
+        .catch((err: string) => {
+          setError(err);
+          setLoading(false);
+        });
+    }, 2000);
   }, []);
+
 
   const handleCardClick = (comic: ComicsProps) => {
     setSelectedComic(comic);
   };
-  console.log(comicsList)
-
 
   const navigate = useNavigate();
 
-  const state = { data: filteredData, comic: selectedComic, destination: destinationAddress }
+  const state = {
+    comic: selectedComic,
+  }
   const handleSendClick = () => {
     navigate('/send/', { state });
   };
-
-  const handleCepChange = (event: any) => {
-    setCep(event.target.value);
-  };
-
-  const handleCepSubmit = async (event: any) => {
-    event.preventDefault();
-
-    try {
-      const response = await axios.get(`https://viacep.com.br/ws/${cep}/json/`);
-      setFilteredData(response.data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  console.log(filteredData)
-  console.log(filteredData.localidade)
+  if (loading) {
+    return <Loading>Carregando...</Loading>
+  }
+  if (error) {
+    return <div>{error}</div>
+  }
   return (
 
     <Container>
@@ -122,20 +98,9 @@ export function Comics() {
                   <h3>Price:</h3>
                   <p>$ {selectedComic.prices.find(price => price.type === 'printPrice')?.price || ''}</p>
                   <Button>
-                    <form onSubmit={handleCepSubmit}>
-
-                      <input type="text" id="cep" placeholder="CEP" value={cep} onChange={handleCepChange} />
-                      <button type="submit">Filtrar</button>
-                    </form>
-                    {filteredData && (
-                      <div>
-                        <h2>{filteredData.localidade} - {filteredData.uf}</h2>
-                        <p>Bairro: {filteredData.bairro}</p>
-                        <p>Logradouro: {filteredData.logradouro}</p>
-                        <p>CEP: {filteredData.cep}</p>
-                        <button onClick={handleSendClick}>Confirmar</button>
-                      </div>
-                    )}
+                    <div>
+                      <button onClick={handleSendClick}>Confirmar</button>
+                    </div>
                   </Button>
                 </span>
 
