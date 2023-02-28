@@ -29,18 +29,15 @@ export const Container = styled.main`
 `
 export const ContainerMap = styled.div`
   width: 70%;
-  /* height: auto; */
   @media screen and (max-width: ${(props) => props.theme.breakpoints.md}) {
-    /* display: flex; */
     width: 100%;
     margin: 0;
     padding: 0;
-    /* height: auto; */
   }
 `
 export const ContainerForm = styled.div`
   width: 30%;
-  /* position:relative; */
+
   button {
     margin-top: 0.5rem;
   }
@@ -54,7 +51,7 @@ export const ContainerForm = styled.div`
     gap: 1rem;
   }
 `
-export const Form = styled.form`
+export const Form = styled.div`
   @media screen and (max-width: ${(props) => props.theme.breakpoints.md}) {
     width: 50%;
   }

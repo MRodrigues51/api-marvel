@@ -7,8 +7,7 @@ import Geocode from "react-geocode";
 const containerStyle = {
   maxWidth: '600px',
   height: '400px',
-  // marginLeft: '1rem',
-  // marginRight: '1rem'
+
 };
 
 interface Address {
@@ -38,7 +37,6 @@ export function Send() {
   const [error, setError] = useState<string | null>(null);
 
   const apiKey = "AIzaSyDPhTZEnGi61k19jjdQprQQOerTE8TQ5U0"
-
 
   useEffect(() => {
     Geocode.setApiKey(apiKey);
@@ -85,6 +83,7 @@ export function Send() {
     setMarkers([...markers, location])
     map?.panTo(location)
   }
+
   return (
 
     <Container>
