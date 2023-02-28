@@ -4,7 +4,11 @@ export const Container = styled.main`
   display: flex;
   justify-content: space-between;
   margin: 2rem;
-
+  height: 100vh;
+  @media screen and (max-width: ${(props) => props.theme.breakpoints.md}) {
+    flex-direction: column;
+    margin: 0.5rem
+  }
   .address {
     visibility: hidden;
     box-sizing: border-box;
@@ -25,13 +29,34 @@ export const Container = styled.main`
 `
 export const ContainerMap = styled.div`
   width: 70%;
-  height: 800px;
+  /* height: auto; */
+  @media screen and (max-width: ${(props) => props.theme.breakpoints.md}) {
+    /* display: flex; */
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    /* height: auto; */
+  }
 `
 export const ContainerForm = styled.div`
   width: 30%;
-  position:relative;
+  /* position:relative; */
   button {
     margin-top: 0.5rem;
+  }
+
+  @media screen and (max-width: ${(props) => props.theme.breakpoints.md}) {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    width: 100%;
+    gap: 1rem;
+  }
+`
+export const Form = styled.form`
+  @media screen and (max-width: ${(props) => props.theme.breakpoints.md}) {
+    width: 50%;
   }
 `
 export const BoxInfoSend = styled.div`
@@ -48,10 +73,7 @@ export const BoxInfoSend = styled.div`
     width: 150px;
     height: auto;
   }
+  @media screen and (max-width: ${(props) => props.theme.breakpoints.md}) {
+    width: 50%;
+  }
 `
-
-
-export const containerStyle = {
-  width: '600px',
-  height: '400px'
-};

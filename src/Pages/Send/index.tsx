@@ -1,12 +1,14 @@
 import { GoogleMap, Marker, LoadScript, StandaloneSearchBox } from '@react-google-maps/api';
 import { useEffect, useState } from "react";
 import { useLocation } from 'react-router-dom';
-import { BoxInfoSend, Container, ContainerForm, ContainerMap } from "./styles";
+import { BoxInfoSend, Container, ContainerForm, ContainerMap, Form } from "./styles";
 import Geocode from "react-geocode";
 
 const containerStyle = {
-  width: '600px',
-  height: '400px'
+  maxWidth: '600px',
+  height: '400px',
+  // marginLeft: '1rem',
+  // marginRight: '1rem'
 };
 
 interface Address {
@@ -84,7 +86,9 @@ export function Send() {
     map?.panTo(location)
   }
   return (
+
     <Container>
+
       <ContainerMap>
         <LoadScript
           googleMapsApiKey={apiKey}
@@ -109,7 +113,8 @@ export function Send() {
 
       </ContainerMap>
       <ContainerForm>
-        <div>
+
+        <Form>
           <form onSubmit={handleFormSubmit}>
             <input type="text" placeholder="CEP" value={address.cep} onChange={(e) => setAddress({ ...address, cep: e.target.value })} />
             <input type="text" placeholder="Logradouro" value={address.logradouro} onChange={(e) => setAddress({ ...address, logradouro: e.target.value })} />
@@ -118,13 +123,14 @@ export function Send() {
             <input type="text" placeholder="UF" value={address.uf} onChange={(e) => setAddress({ ...address, uf: e.target.value })} />
             <button type="submit">Buscar</button>
           </form>
-          <BoxInfoSend>
-            <h3>Comic selected for send:</h3>
-            {comic?.title}
-            <img src={`${comic?.thumbnail.path}.${comic?.thumbnail.extension}`} alt="" />
-          </BoxInfoSend>
-          {error && <div>{error}</div>}
-        </div>
+        </Form>
+        <BoxInfoSend>
+          <h3>Comic selected for send:</h3>
+          {comic?.title}
+          <img src={`${comic?.thumbnail.path}.${comic?.thumbnail.extension}`} alt="" />
+        </BoxInfoSend>
+        {error && <div>{error}</div>}
+
       </ContainerForm>
     </Container>
 

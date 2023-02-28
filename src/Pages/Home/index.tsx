@@ -12,11 +12,13 @@ export function Home() {
   return (
     <Container>
       <section style={{
+        margin: 0,
         backgroundImage: `url(${ImgBack})`,
         backgroundRepeat: 'no-repeat',
-        backgroundAttachment: 'unset',
-        backgroundPosition: 'center',
-        height: '436px'
+        backgroundAttachment: 'fixed',
+        backgroundPosition: 'top center',
+        height: '300px',
+        // width: '100%'
       }}>
       </section>
 
@@ -25,7 +27,7 @@ export function Home() {
 
         <ListComics>
           <div>
-            <h2>Title Marvel</h2>
+            <h2>Marvel Comics</h2>
             <p>Comics subscribe and description</p>
             <img src="https://images.unsplash.com/photo-1620075267033-09d12ec75b40?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8bWFydmVsJTIwY29taWNzfGVufDB8MXwwfHw%3D&auto=format&fit=crop&w=250&q=30" alt="marvel" />
             <footer>Ver mais</footer>

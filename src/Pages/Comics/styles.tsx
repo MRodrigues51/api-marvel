@@ -53,7 +53,6 @@ export const ModalContent = styled.div`
   background: ${({ theme }) => theme.colors.modal};
   height: calc(100vh - 20vh);
   overflow-y: scroll;
-
   h2 {
     margin-bottom: 1rem;
   }
@@ -65,6 +64,8 @@ export const ModalHeader = styled.header`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap:1rem;
+
   button {
     padding: 0.3rem;
   }
@@ -73,6 +74,12 @@ export const ModalHeader = styled.header`
 export const ModalSection = styled.section`
   display: flex;
   gap: 1.5rem;
+  @media screen and (max-width: ${(props) => props.theme.breakpoints.md}) {
+    flex-direction: column;
+    img {
+      width: fit-content;
+    }
+  }
 `
 export const Button = styled.div`
   margin-top: 2rem;

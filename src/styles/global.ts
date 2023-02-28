@@ -6,6 +6,8 @@ export const GlobalStyle = createGlobalStyle`
     padding: 0;
     outline: 0;
     box-sizing: border-box;
+
+
   }
   body {
     background: ${(props) => props.theme.colors.background};
@@ -47,12 +49,9 @@ export const GlobalStyle = createGlobalStyle`
     background: ${({ theme }) => theme.colors.modal};
     width: 95%;
     height: auto;
-    /* height: 200px; */
     align-items: center;
     margin: 2.5%;
     justify-content: center;
-    /* max-width: 500px; */
-    /* max-height: 500px; */
     padding: 1rem;
     border-radius: 5px;
   }

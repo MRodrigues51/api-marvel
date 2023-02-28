@@ -4,8 +4,11 @@ export const Container = styled.footer`
    display: flex;
   align-items: center;
   justify-content: center;
-  padding-left: 2.5rem;
-  padding-right: 2.5rem;
+  width: 100%;
   background: ${({ theme }) => theme.colors.header};
   height: 50px;
+  p {
+    text-align: justify-all;
+    font-size: small;
+  }
 `

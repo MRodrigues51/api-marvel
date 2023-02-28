@@ -12,16 +12,21 @@ export const SectionComics = styled.section`
 `
 export const ListComics = styled.div`
   display: flex;
-  justify-content: space-between;
+  flex-wrap: wrap;
+  justify-content: space-around;
   align-items: center;
   gap: 2rem;
   text-align: center;
 
+  padding-left: 20px;
+  padding-right: 20px;
   div {
     border-radius: 5px;
     box-shadow: 7px 7px 13px 0px rgba(50, 50, 50, 0.22);
     padding: 10px;
     transition: all 0.3s ease-out;
+
+    background: ${({ theme }) => theme.colors.button};
     h2, p {
       margin-bottom: 0.5rem;
     }
