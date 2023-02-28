@@ -15,4 +15,45 @@ export const GlobalStyle = createGlobalStyle`
     font-size: ${(props) => props.theme.fontSizes.normal};
     font-family: ${(props) => props.theme.fonts};
   }
+  button {
+    color:#fff;
+    background-color: ${({ theme }) => theme.colors.button};
+    outline: none;
+    border: 0;
+    color: #fff;
+    padding:10px 20px;
+    text-transform:uppercase;
+    margin-top:10px;
+    border-radius:2px;
+    cursor:pointer;
+    position:relative;
+  }
+  input {
+      background: ${({ theme }) => theme.colors.modal};
+      border:0;
+      border-bottom:1px solid #555;
+      background:transparent;
+      width:100%;
+      padding:8px 0 5px 0;
+      font-size:0.8rem;
+      color:#fff;
+    &:focus {
+      border:none;
+      outline:none;
+      border-bottom:1px solid #e74c3c;
+    }
+}
+  .modalContent {
+    background: ${({ theme }) => theme.colors.modal};
+    width: 95%;
+    height: auto;
+    /* height: 200px; */
+    align-items: center;
+    margin: 2.5%;
+    justify-content: center;
+    /* max-width: 500px; */
+    /* max-height: 500px; */
+    padding: 1rem;
+    border-radius: 5px;
+  }
 `

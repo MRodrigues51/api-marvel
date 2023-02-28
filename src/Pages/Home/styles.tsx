@@ -47,4 +47,5 @@ export const SubTitle = styled.h3`
 export const LinkComics = styled.h3`
   text-align: right;
   padding: 1.5rem;
+  cursor: pointer;
 `

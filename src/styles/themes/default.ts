@@ -3,6 +3,9 @@ export const defaultTheme = {
     header: '#444444',
     background: '#656565',
     text: '#E9E9E9',
+    modal: '#333333',
+    textDark: '#333333',
+    button: '#e74c3c'
   }, fonts: ['Roboto', 'Open Sans', 'Arial', 'Helvetica', 'sans-serif'].join(','),
   fontSizes: {
     small: '.8rem',
